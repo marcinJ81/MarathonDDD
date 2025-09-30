@@ -39,6 +39,8 @@ namespace MarathonDomainLibrary
 
         }
 
+        //TODO 30.09.2025
+        //set date change to config
         private void ValidateTermin()
         {
             if (_terminZmiany < DateTime.Now)
@@ -59,7 +61,7 @@ namespace MarathonDomainLibrary
 
         private void ValidateIloscMiejsc()
         {
-            if (_grupaDocelowa.IloscMiejsc >= _grupaDocelowa.Zawodnicy.Count)
+            if (_grupaDocelowa.IloscMiejscDostepnych >= _grupaDocelowa.Zawodnicy.Count)
                 throw new DomainException("Brak miejsc w grupie docelowej");
         }
 

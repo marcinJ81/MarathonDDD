@@ -12,14 +12,16 @@ namespace MarathonDomainLibrary
         public int IdDystans { get; private set; }
         public string Nazwa { get; private set; }
         public List<Zawodnik> Zawodnicy { get; private set; } = new List<Zawodnik>();
-        public int IloscMiejsc { get; private set; }
+        public int IloscMiejscDostepnych { get; private set; }
+        public int IloscWszystkichMiejsc { get; private set; }
         public bool Zamknieta { get; private set; }
         public GrupaStartowa(int id, int idDystans, string nazwa, int iloscMiejsc, bool zamknieta)
         {
             Id = id;
             IdDystans = idDystans;
             Nazwa = nazwa ?? throw new ArgumentNullException(nameof(nazwa));
-            IloscMiejsc = iloscMiejsc;
+            IloscWszystkichMiejsc = iloscMiejsc;
+            IloscMiejscDostepnych = iloscMiejsc;
             Zamknieta = zamknieta;
         }
 
@@ -34,7 +36,7 @@ namespace MarathonDomainLibrary
                 throw new DomainException("Zawodnik należy do innego dystansu");
             }
             Zawodnicy.Remove(zawodnik);
-            IloscMiejsc--;
+            IloscMiejscDostepnych++;
         }
         public void DodajZawodnika(Zawodnik zawodnik)
         {
@@ -42,12 +44,12 @@ namespace MarathonDomainLibrary
                 throw new ArgumentNullException(nameof(zawodnik));
             if (Zamknieta)
                 throw new DomainException("Grupa startowa jest zamknięta");
-            if (Zawodnicy.Count >= IloscMiejsc)
+            if ((IloscMiejscDostepnych + IloscWszystkichMiejsc) == IloscWszystkichMiejsc )
                 throw new DomainException("Brak miejsc w grupie startowej");
             if (Zawodnicy.Contains(zawodnik))
                 throw new DomainException("Zawodnik już należy do tej grupy startowej");
             Zawodnicy.Add(zawodnik);
-            this.IloscMiejsc++;
+            this.IloscMiejscDostepnych--;
         }
     }
 }
