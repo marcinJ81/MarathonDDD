@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarathonDomainLibrary", "MarathonDomainLibrary.csproj", "{90755AB5-33EB-02F7-B183-DB87BB9BEA19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainUnitTest", "..\DomainUnitTest\DomainUnitTest.csproj", "{2E767CFC-5347-E1AD-EAB7-F446FDA7B531}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90755AB5-33EB-02F7-B183-DB87BB9BEA19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90755AB5-33EB-02F7-B183-DB87BB9BEA19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90755AB5-33EB-02F7-B183-DB87BB9BEA19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90755AB5-33EB-02F7-B183-DB87BB9BEA19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E767CFC-5347-E1AD-EAB7-F446FDA7B531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E767CFC-5347-E1AD-EAB7-F446FDA7B531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E767CFC-5347-E1AD-EAB7-F446FDA7B531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E767CFC-5347-E1AD-EAB7-F446FDA7B531}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55D65A00-DB33-4536-9523-612DC18F1ED5}
+	EndGlobalSection
+EndGlobal
