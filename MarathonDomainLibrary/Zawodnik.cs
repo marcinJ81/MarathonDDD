@@ -8,16 +8,16 @@ namespace MarathonDomainLibrary
 {
     public class Zawodnik
     {
-        public int Id { get; private set; }
+        public Guid Id { get; private set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public int IdDystans { get; private set; }
         public GrupaStartowa GrupaStartowa { get; private set; }
         public bool CzyDokonalZmianyGrupy { get; private set; }
         public NumerStartowy NumerStartowy { get; private set; }
-        public Zawodnik(int id, string imie, string nazwisko, int idDystans)
+        public Zawodnik(string imie, string nazwisko, int idDystans)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Imie = imie ?? throw new ArgumentNullException(nameof(imie));
             Nazwisko = nazwisko ?? throw new ArgumentNullException(nameof(nazwisko));
             IdDystans = idDystans;
