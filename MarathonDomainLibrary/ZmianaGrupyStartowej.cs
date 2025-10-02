@@ -61,7 +61,7 @@ namespace MarathonDomainLibrary
 
         private void ValidateIloscMiejsc()
         {
-            if (_grupaDocelowa.IloscMiejscDostepnych >= _grupaDocelowa.Zawodnicy.Count)
+            if (_grupaDocelowa.IloscMiejscDostepnych == 0)
                 throw new DomainException("Brak miejsc w grupie docelowej");
         }
 

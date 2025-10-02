@@ -42,6 +42,25 @@ namespace DomainUnitTest
                 new Zawodnik("Natalia", "Kalinowska", 1)
             };
 
+        public static List<Zawodnik> players_15_2 { get; private set; } = new List<Zawodnik>()
+            {
+                new Zawodnik("Robert", "Grabowski", 1),
+                new Zawodnik("Barbara", "Pawlak", 1),
+                new Zawodnik("Marek", "Michalski", 1),
+                new Zawodnik("Dorota", "Król", 1),
+                new Zawodnik("Grzegorz", "Wróbel", 1),
+                new Zawodnik("Aleksandra", "Adamczyk", 1),
+                new Zawodnik("Rafał", "Dudek", 1),
+                new Zawodnik("Beata", "Nowakowska", 1),
+                new Zawodnik("Dariusz", "Sikora", 1),
+                new Zawodnik("Iwona", "Rutkowska", 1),
+                new Zawodnik("Jacek", "Baran", 1),
+                new Zawodnik("Marta", "Głowacka", 1),
+                new Zawodnik("Sebastian", "Lis", 1),
+                new Zawodnik("Natalia", "Kalinowska", 1),
+                new Zawodnik("Krol", "Julian", 1)
+            };
+
     }
 
     [TestFixture]
@@ -219,48 +238,43 @@ namespace DomainUnitTest
 
         }
 
-        //[Test]
-        //public void ZmienGrupe_BrakMiejsc_RzucaWyjatek()
-        //{
-        //    // Arrange
-        //    var zawodnik = new Zawodnik { CzyDokonalZmianyGrupy = false };
-        //    var grupaWyjsciowa = new GrupaStartowa { IdDystans = 1 };
-        //    var grupaDocelowa = new GrupaStartowa
-        //    {
-        //        IdDystans = 1,
-        //        IloscMiejsc = 2,
-        //        Zawodnicy = new List<Zawodnik> { new Zawodnik(), new Zawodnik() } // pełna
-        //    };
+        [Test]
+        public void ZmienGrupe_BrakMiejsc_RzucaWyjatek()
+        {
+            var players = PlayersLists.players_15;
+            var startingGroup = new GrupaStartowa(1, 1, "Grupa 1 Dystans 100 KM", 15, false);
+            foreach (var zawodnik in players)
+            {
+                startingGroup.DodajZawodnika(zawodnik);
+            }
 
-        //    var zmiana = new ZmianaGrupyStartowej(
-        //        DateTime.Now.AddDays(1),
-        //        zawodnik,
-        //        grupaWyjsciowa,
-        //        grupaDocelowa
-        //    );
+            var zawodnicy2 = PlayersLists.players_15_2;
+            var targetGroup = new GrupaStartowa(2, 1, "Grupa 2 Dystans 200 KM", 15, false);
+            foreach (var zawodnik in zawodnicy2)
+            {
+                targetGroup.DodajZawodnika(zawodnik);
+            }
 
-        //    // Act & Assert
-        //    var action = () => zmiana.ZmienGrupe();
-        //    action.Should().Throw<DomainException>()
-        //        .WithMessage("Brak miejsc w grupie docelowej");
-        //}
+            var playerChange = players.FirstOrDefault(x => x.Nazwisko == "Juranek" && x.Imie == "Marcin");
+            var changeDate = DateTime.Now.AddDays(1);
+            var anotherChange = new ZmianaGrupyStartowej(
+                changeDate,
+                playerChange,
+                startingGroup,
+                targetGroup
+            );
 
-        //[TestCase("zawodnik")]
-        //[TestCase("grupaWyjsciowa")]
-        //[TestCase("grupaDocelowa")]
-        //public void Konstruktor_NullArgument_RzucaWyjatek(string paramName)
-        //{
-        //    // Arrange & Act
-        //    Action action = () => new ZmianaGrupyStartowej(
-        //        DateTime.Now,
-        //        paramName == "zawodnik" ? null : new Zawodnik(),
-        //        paramName == "grupaWyjsciowa" ? null : new GrupaStartowa(),
-        //        paramName == "grupaDocelowa" ? null : new GrupaStartowa()
-        //    );
+            // Act & Assert
+            try
+            {
+                anotherChange.ZmienGrupe();
+            }
+            catch (DomainException ex)
+            {
+                var errorMessage = ex.Message;
+                ex.Message.Should().Be("Brak miejsc w grupie docelowej");
+            }
 
-        //    // Assert
-        //    action.Should().Throw<ArgumentNullException>()
-        //        .WithParameterName(paramName);
-        //}
+        }
     }
 }
